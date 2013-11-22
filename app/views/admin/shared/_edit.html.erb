@@ -9,7 +9,7 @@
 	<h4> Merge Articles </h4>
 	<% form_tag controller: "content", action: "merge" do %>
 	  <%= hidden_field_tag :current_id, @article.id %> 
-	  <%= label_tag :merge_id, "Article ID", :class => "test"  %> 
+	  <%= label_tag :merge_id, "Article ID", :class => "test", :id => "merge_with"  %> 
 	  <%= text_field_tag :merge_id, nil, :id => "merge_with" %>
 	  
 	  <%= submit_tag "Merge", :class => "btn" %>
