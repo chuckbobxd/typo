@@ -23,7 +23,7 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    @article = Article.find_by_id params[:merge_id]
+    @article = Article.find_by_id params[:merge_with]
     if current_user.admin?
       @merge = Article.find params[:current_id]
       @article.merge @merge
