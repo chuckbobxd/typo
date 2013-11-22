@@ -6,7 +6,7 @@
 <% end %>
 <% if current_user.admin? %>
 <div class =''>
-	<h4> Merge Content </h4>
+	<h4> Merge Articles </h4>
 	<% form_tag controller: "content", action: "merge" do %>
 	  <%= hidden_field_tag :current_id, @article.id %> 
 	  <%= label_tag :merge_id, "Article ID", :class => "test"  %> 
