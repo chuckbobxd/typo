@@ -13,7 +13,6 @@ class Admin::ContentController < Admin::BaseController
 
   def index
     @search = params[:search] ? params[:search] : {}
-    
     @articles = Article.search_with_pagination(@search, {:page => params[:page], :per_page => this_blog.admin_display_elements})
 
     if request.xhr?
@@ -21,6 +20,15 @@ class Admin::ContentController < Admin::BaseController
     else
       @article = Article.new(params[:article])
     end
+  end
+
+  def merge
+    @article = Article.find_by_id params[:merge_id]
+    if current_user.admin?
+      @merge = Article.find params[:current_id]
+      @article.merge @merge
+    end
+    redirect_to action: 'index'
   end
 
   def new
@@ -197,6 +205,7 @@ class Admin::ContentController < Admin::BaseController
   def destroy_the_draft
     Article.all(:conditions => { :parent_id => @article.id }).map(&:destroy)
   end
+
 
   def set_article_author
     return if @article.author

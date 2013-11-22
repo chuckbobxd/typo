@@ -80,6 +80,22 @@ class Article < Content
     Article.exists?({:parent_id => self.id})
   end
 
+  def merge(article)
+    unless article.comments.empty?
+      article.comments.each do |comment|
+        copy = comment.clone
+        comments << copy
+      end
+    end
+    unless article.body.empty?
+      copy = article.body.clone.freeze
+      update_attribute(:body, body + copy)
+    end
+    save
+    article.destroy
+  end
+
+
   attr_accessor :draft, :keywords
 
   has_state(:state,
