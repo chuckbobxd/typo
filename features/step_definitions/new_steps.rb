@@ -4,5 +4,5 @@ Given /the following articles exist/ do |article_table|
   end	
 end
 
-When /^I visit the edit page for (.+)^/ do |article|
+
  
